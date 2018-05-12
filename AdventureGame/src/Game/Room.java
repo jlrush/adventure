@@ -48,7 +48,7 @@ public class Room extends ItemHolder {
 			setBeenHere();
 		}
 		temp += listExits();
-		temp += listItems("Room contains: "));
+		temp += listItems("Room contains: ");
 		return temp;
 	}
 
