@@ -27,7 +27,7 @@ public class Adventure1 {
 		String input = scanner.nextLine();
 		Player player1 = new Player(input);
 //		player1.addItem(new Item("Shirt", "It has short sleeves and a pocket"));  //test
-		System.out.println("Okay, " + player1.getName() + ", here we go!");
+		output.println("Okay, " + player1.getName() + ", here we go!");
 		
 		ArrayList<CommandHandler> commands = new ArrayList<CommandHandler>(); 
 		commands.add(new Commands.ExamineCommand());
@@ -37,10 +37,10 @@ public class Adventure1 {
 		// This is the main loop
 		do {
 			// First describe where we are 
-			current.preamble();
+			output.println(current.preamble());
 
 			// Parse the commands
-			System.out.print("\nCommand: ");
+			output.print("\nCommand: ");
 			input = scanner.nextLine().toLowerCase();
 			if (input.indexOf(" ") == -1) {
 				command = input;
@@ -54,7 +54,7 @@ public class Adventure1 {
 			newRoom = current.takeExit(command);
 			if (newRoom != null) {
 				if (current.equals(newRoom))
-					System.out.println("There is no exit in that direction");
+					output.println("There is no exit in that direction");
 				else {
 					current = newRoom;
 				}
@@ -77,11 +77,11 @@ public class Adventure1 {
 			// Get an object in a room
 			if (command.equals("get") && object != "") {
 				if (!current.findItem(object)) {
-					System.out.println("There is no " + object + " in this room");
+					output.println("There is no " + object + " in this room");
 					continue;
 				} else {
 					player1.addItem(current.getItem(object));
-					System.out.println("You now have the " + object);
+					output.println("You now have the " + object);
 					continue;
 				}
 			}
@@ -89,11 +89,11 @@ public class Adventure1 {
 			// Drop an object in a room
 			if (command.equals("drop") && object != "") {
 				if (!player1.findItem(object)) {
-					System.out.println("You don't have any " + object + " to drop");
+					output.println("You don't have any " + object + " to drop");
 					continue;
 				} else {
 					current.addItem(player1.getItem(object));
-					System.out.println("You no longer have the " + object);
+					output.println("You no longer have the " + object);
 					continue;
 				}
 			}
@@ -103,12 +103,11 @@ public class Adventure1 {
 			if (command.equalsIgnoreCase("exit"))
 				done = true;
 			else
-				System.out.println(unknown.getMesssage());
-		}while(!done);System.out.println("Player One is dead! Long live Player Two");
+				output.println(unknown.getMesssage());
+		}while(!done);
+	
+		output.println("Player One is dead! Long live Player Two");
 
 	}
 
-	public static void getObject(String object) {
-
-	}
 }
