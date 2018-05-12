@@ -13,6 +13,8 @@ public class Adventure1 {
 		Room current = Setup.main(args);
 		Room newRoom;
 		
+		UserOutput output = new ConsoleOutput();
+		
 		// Then everything else
 		Scanner scanner = new Scanner(System.in);
 		Messages unknown = new Messages();
@@ -21,7 +23,7 @@ public class Adventure1 {
 		String object = "";
 		
 		// and build a new player
-		System.out.println("Welcome, Player One!  What shall I call you?");
+		output.println("Welcome, Player One!  What shall I call you?");
 		String input = scanner.nextLine();
 		Player player1 = new Player(input);
 //		player1.addItem(new Item("Shirt", "It has short sleeves and a pocket"));  //test
