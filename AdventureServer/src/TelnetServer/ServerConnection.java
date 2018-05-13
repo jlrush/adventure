@@ -56,7 +56,9 @@ public class ServerConnection extends Thread {
 			game = new Adventure1(new TelnetOutput(pw), playerName);
 
 			for(;;) {
-				pw.print("Command: ");
+				//pw.print("\033[2J"); // Clear Screen
+				//pw.print("\033[0;0H"); // Go to top of screen
+				pw.print("\033[32mCommand: \033[0m");
 				pw.flush();
 				
 				String command = filter(br.readLine());
