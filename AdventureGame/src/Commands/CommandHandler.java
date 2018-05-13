@@ -12,7 +12,7 @@ public abstract class CommandHandler {
 		this.commands = new ArrayList<String>(Arrays.asList(commands));
 	}
 	
-	public boolean executeCommand(String command, Player player, Room room) {
+	public CommandResult executeCommand(String command, Player player, Room room) {
 		// Get each word in the input and split it into an array
 		String[] tokens = command.split("\\s+");
 		boolean commandMatches = false;
@@ -25,14 +25,15 @@ public abstract class CommandHandler {
 			}
 		}
 
+		CommandResult result = new CommandResult();
 		if (commandMatches) {
 			// We have a match, so go ahead and process the command
-			processCommand(tokens, player, room);
-			return true;
-		} else {
-			return false;
+			result.processed = true;
+			result.output = processCommand(tokens, player, room);
 		}
+		
+		return result;
 	}
 	
-	protected abstract void processCommand(String[] tokens, Player player, Room room);
+	protected abstract String processCommand(String[] tokens, Player player, Room room);
 }

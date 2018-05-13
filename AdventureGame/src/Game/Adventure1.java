@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import Commands.CommandHandler;
+import Commands.CommandResult;
 
 public class Adventure1 {
 	private Room current;
@@ -64,15 +65,19 @@ public class Adventure1 {
 		}
 		
 		// Handle any registered command
-		boolean handled = false;
+		CommandResult result = null;
 		for (CommandHandler handler : commands) {
-			handled = handler.executeCommand(input, player1, current);
-			if (handled) {
+			result = handler.executeCommand(input, player1, current);
+			if (result.output != null && !result.output.isEmpty()) {
+				output.println(result.output);
+			}
+			
+			if (result.processed) {
 				break;
 			}
 		}
 		
-		if (handled) {
+		if (result != null && result.processed) {
 			return;
 		}
 

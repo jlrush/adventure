@@ -9,11 +9,11 @@ public class ExamineCommand extends CommandHandler {
 	}
 	
 	@Override
-	protected void processCommand(String[] tokens, Player player, Room room) {
-		String temp = ""
+	protected String processCommand(String[] tokens, Player player, Room room) {
+		String temp = "";
 		if (tokens.length < 2) {
 			temp = "What do you want to examine?";
-			return;
+			return temp;
 		}
 		
 		String target = tokens[1];
@@ -24,6 +24,7 @@ public class ExamineCommand extends CommandHandler {
 				}
 			}
 		}
-		return = temp;
+		
+		return temp;
 	}
 }

@@ -52,6 +52,7 @@ public class ServerConnection extends Thread {
 			pw.println("Welcome, Player One! What shall I call you?");
 			String playerName = filter(br.readLine());
 			pw.println("Okay, " + playerName + ", here we go!");
+			System.out.println(playerName + ", has bravely entered the dungeon.");
 			game = new Adventure1(new TelnetOutput(pw), playerName);
 
 			for(;;) {

@@ -9,7 +9,7 @@ public class InventoryCommand extends CommandHandler {
 	}
 
 	@Override
-	protected void processCommand(String[] tokens, Player player, Room room) {
+	protected String processCommand(String[] tokens, Player player, Room room) {
 		return(player.listItems("You currently have a "));
 	}
 }
