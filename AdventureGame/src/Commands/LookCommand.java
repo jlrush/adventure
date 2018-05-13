@@ -10,6 +10,6 @@ public class LookCommand extends CommandHandler {
 
 	@Override
 	protected void processCommand(String[] tokens, Player player, Room room) {
-		System.out.println("\n" + room.getDescription());
+		return("\r\n" + room.getDescription());
 	}
 }

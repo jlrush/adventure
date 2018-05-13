@@ -10,8 +10,9 @@ public class ExamineCommand extends CommandHandler {
 	
 	@Override
 	protected void processCommand(String[] tokens, Player player, Room room) {
+		String temp = ""
 		if (tokens.length < 2) {
-			System.out.println("What do you want to examine?");
+			temp = "What do you want to examine?";
 			return;
 		}
 		
@@ -19,9 +20,10 @@ public class ExamineCommand extends CommandHandler {
 		if (target != null && !target.isEmpty() ) {
 			if (!room.examItem(target)) {
 				if (!player.examItem(target)) {
-					System.out.println("I don't see that here");
+					temp = "I don't see that here";
 				}
 			}
 		}
+		return = temp;
 	}
 }
