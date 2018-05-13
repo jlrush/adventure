@@ -1,21 +1,23 @@
 package TelnetServer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.util.ArrayList;
+import java.net.Socket;
 
 public class Main {
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException {
 		final int portNumber = 8023;
 		System.out.println("Creating server socket on port " + portNumber);
-		ArrayList<ServerConnection> clients = new ArrayList<ServerConnection>();
-		
 		ServerSocket serverSocket = new ServerSocket(portNumber);
+		ServerConnection client;
 		while (true) {
-			ServerConnection client = new ServerConnection(serverSocket.accept());
+			Socket socket = serverSocket.accept();
+			client = new ServerConnection(socket);		
 			client.start();
-			clients.add(client);
 		}
-		//serverSocket.close();
 	}
 }

@@ -2,8 +2,7 @@ package Game;
 
 public class Setup {
 
-	public static Room main(String[] args) {
-		
+	public static Room Initiatlize() {		
 		Room Master = new Room("Master Bedroom","You are in a fairly large room with a queen-size bed");
 		Room Hallway = new Room("South end of Hallway","You are in a hallway with a number of doors");
 		Room Closet = new Room("Closet","This is the closet in the Master Bedroom.\nThere's nobody living in here at the moment");
