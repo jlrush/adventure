@@ -29,6 +29,7 @@ public class TelnetOutput extends UserOutput {
 	@Override
 	public void print(String text) {
 		System.out.print(text);
-		writer.println(text);
+		writer.print(text);
+		writer.flush();
 	}
 }

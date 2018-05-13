@@ -13,18 +13,17 @@ public class ServerConnection extends Thread {
 	private Socket socket;
 	private TelnetOutput output;
 	private BufferedReader reader;
-	private OutputStream stream;
-	private PrintWriter writer;
+	//private AsyncNotice notice;
 
 	public ServerConnection(Socket socket) throws IOException {
 		this.socket = socket;
-		// this.output = new TelnetOutput(socket);
-		// this.reader = new BufferedReader(new
-		// InputStreamReader(socket.getInputStream()));
+		this.output = new TelnetOutput(socket);
+		this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		this.output = new TelnetOutput(socket);
 		System.out.println("Accepted connection from " + socket.getInetAddress().toString());
-		// reader.readLine(); // Read telnet client ID and ignore it.
+		//this.notice = new AsyncNotice(this.output);
 	}
-	
+
 	private String filter(String str) {
 		String command = "";
 		for (int i = 0; i < str.length(); i++) {
@@ -33,72 +32,57 @@ public class ServerConnection extends Thread {
 				command += str.charAt(i);
 			}
 		}
-		
+
 		return command.trim();
 	}
 
 	public void run() {
 		try {
-			OutputStream os = socket.getOutputStream();
-			PrintWriter pw = new PrintWriter(os, true);
-			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			
 			Adventure1 game;
+
+			output.println("Welcome, Player One! What shall I call you?");
+			String playerName = filter(reader.readLine());
 			
-//			output.println("Welcome, Player One!  What shall I call you?");
-//			String input = scanner.nextLine();
-//			output.println("Okay, " + player1.getName() + ", here we go!");
-
-			pw.println("Welcome, Player One! What shall I call you?");
-			String playerName = filter(br.readLine());
-			pw.println("Okay, " + playerName + ", here we go!");
+			output.println("Okay, " + playerName + ", here we go!");
 			System.out.println(playerName + ", has bravely entered the dungeon.");
-			game = new Adventure1(new TelnetOutput(pw), playerName);
+			game = new Adventure1(output, playerName);
+			//this.notice.run();
 
-			for(;;) {
-				//pw.print("\033[2J"); // Clear Screen
-				//pw.print("\033[0;0H"); // Go to top of screen
-				pw.print("\033[32mCommand: \033[0m");
-				pw.flush();
-				
-				String command = filter(br.readLine());
+			for (;;) {
+				// pw.print("\033[2J"); // Clear Screen
+				// pw.print("\033[0;0H"); // Go to top of screen
+				output.print("\033[32mCommand: \033[0m");
+
+				String command = filter(reader.readLine());
 				game.ProcessInput(command);
 				if (game.isGameOver()) {
 					break;
 				}
 			}
-			
-			System.out.println("Disconnecting");
-			pw.close();
-			socket.close();
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 		}
 
-	// output.println("1What's your name?");
-	// output.println("2What's your name?");
-	// output.println("3What's your name?");
-	//
-	// String str = "";
-	// try {
-	// str = reader.readLine();
-	// } catch (IOException e) {
-	// System.out.println("Reader error.");
-	// }
-	//
-	// output.println("Hello, " + str);
-	// System.out.println("Just said hello to:" + str);
-	//
-	// Disconnect();
+		Disconnect();
 	}
 
 	public void Disconnect() {
 		System.out.println("Disconnected from " + socket.getInetAddress().toString());
+		
+		try {
+			this.reader.close();
+		} catch (IOException ioException) {
+		} finally {
+			this.reader = null;
+		}
 
 		this.output.close();
+		this.output = null;
 
 		try {
 			this.socket.close();
-		} catch (IOException e) {
-		}
+		} catch (IOException ioException) {
+		} finally {
+			this.socket = null;
+		}		
 	}
 }
