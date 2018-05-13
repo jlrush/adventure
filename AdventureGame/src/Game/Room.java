@@ -42,14 +42,16 @@ public class Room extends ItemHolder {
 
 	public String preamble() {
 		String temp = "";
+		String temp2 = "";
 		temp = ("Location: " + this.name + "\r\n");
-	
 		if (!this.getBeenHere()) {
 			temp += ("\r\n" + this.description + "\r\n");
 			setBeenHere();
 		}
 		temp += listExits();
-		temp += listItems("\r\nRoom contains: ");
+		temp2 = listItems("Room contains: ");
+		if (temp2.substring(0, 4).equals("Room"))
+			temp += ("\r\n" + listItems("Room contains: "));
 		return temp;
 	}
 

@@ -45,6 +45,8 @@ public class Adventure1 {
 		boolean done = false;
 		String command = "";
 		String object = "";
+		String Yellow = "\033[33m";
+		String White = "\033[0m";
 		
 		// Parse the commands
 		if (input.indexOf(" ") == -1) {
@@ -86,11 +88,11 @@ public class Adventure1 {
 		// Get an object in a room
 		if (command.equals("get") && object != "") {
 			if (!current.findItem(object)) {
-				output.println("There is no " + object + " in this room");
+				output.println(Yellow + "There is no " + object + " in this room" + White);
 				return;
 			} else {
 				player1.addItem(current.getItem(object));
-				output.println("You now have the " + object);
+				output.println(Yellow + "You now have the " + object + White);
 				return;
 			}
 		}
@@ -98,19 +100,19 @@ public class Adventure1 {
 		// Drop an object in a room
 		if (command.equals("drop") && object != "") {
 			if (!player1.findItem(object)) {
-				output.println("You don't have any " + object + " to drop");
+				output.println(Yellow + "You don't have any " + object + " to drop" + White);
 				return;
 			} else {
 				current.addItem(player1.getItem(object));
-				output.println("You no longer have the " + object);
+				output.println(Yellow + "You no longer have the " + object + White);
 				return;
 			}
 		}
 		
 		// Last command to check
-		if (command.equalsIgnoreCase("exit"))
+		if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit"))
 			this.gameIsOver = true;
 		else
-			output.println(unknown.getMesssage());
+			output.println(Yellow + unknown.getMesssage() + White);
 	}
 }

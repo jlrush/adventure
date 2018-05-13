@@ -10,6 +10,8 @@ public class LookCommand extends CommandHandler {
 
 	@Override
 	protected String processCommand(String[] tokens, Player player, Room room) {
-		return("\r\n" + room.getDescription());
+		String Yellow = "\033[33m";
+		String White = "\033[0m";
+		return(Yellow + room.getDescription() + White);
 	}
 }

@@ -10,10 +10,12 @@ public class ExamineCommand extends CommandHandler {
 	
 	@Override
 	protected String processCommand(String[] tokens, Player player, Room room) {
+		String Yellow = "\033[33m";
+		String White = "\033[0m";
 		String temp = "";
 		if (tokens.length < 2) {
 			temp = "What do you want to examine?";
-			return temp;
+			return Yellow + temp + White;
 		}
 		
 		String target = tokens[1];
@@ -26,6 +28,6 @@ public class ExamineCommand extends CommandHandler {
 				} 
 			}
 		}
-		return temp;
+		return Yellow + temp + White;
 	}
 }
