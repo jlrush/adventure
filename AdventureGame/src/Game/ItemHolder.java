@@ -44,16 +44,14 @@ public class ItemHolder {
 		return found;
 	}
 
-	public boolean examItem(String name) {
+	public String examItem(String name) {
 		boolean found = false;
 		for (Item item : this.item) {
 			if (name.equalsIgnoreCase(item.name)) {
-				System.out.println(item.description);
-				found = true;
-				break;
+				return item.description;
 			}
 		}
-		return found;
+		return null;
 	}
 
 	public Item getItem(String name) {
