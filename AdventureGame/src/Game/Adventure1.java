@@ -33,6 +33,11 @@ public class Adventure1 {
 	}
 	
 	public void ProcessInput(String input) {
+		processInternal(input);
+		output.println(current.preamble());
+	}
+	
+	public void processInternal(String input) {
 		Room newRoom;
 		
 		// Then everything else
@@ -41,9 +46,6 @@ public class Adventure1 {
 		String command = "";
 		String object = "";
 		
-		// First describe where we are 
-		output.println(current.preamble());
-
 		// Parse the commands
 		if (input.indexOf(" ") == -1) {
 			command = input;
