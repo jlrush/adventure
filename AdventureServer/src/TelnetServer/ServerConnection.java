@@ -40,10 +40,12 @@ public class ServerConnection extends Thread {
 		try {
 			Adventure1 game;
 
-			output.println("Welcome, Player One! What shall I call you?");
+			output.println("\033[2J"); // Clear Screen
+			output.println("\033[0;0H"); //Home cursor
+			output.println("Welcome, Player One! What shall I call you?\r\n");
 			String playerName = filter(reader.readLine());
 			
-			output.println("Okay, " + playerName + ", here we go!");
+			output.println("\r\nOkay, " + playerName + ", here we go!\r\n\r\n\r\n");
 			System.out.println(playerName + ", has bravely entered the dungeon.");
 			game = new Adventure1(output, playerName);
 			//this.notice.run();
