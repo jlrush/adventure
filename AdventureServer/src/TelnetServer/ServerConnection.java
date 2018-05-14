@@ -53,7 +53,7 @@ public class ServerConnection extends Thread {
 			for (;;) {
 				// pw.print("\033[2J"); // Clear Screen
 				// pw.print("\033[0;0H"); // Go to top of screen
-				output.print("\033[32mCommand: \033[0m");
+				output.print("\r\n\033[32mCommand: \033[0m");
 
 				String command = filter(reader.readLine());
 				game.ProcessInput(command);
