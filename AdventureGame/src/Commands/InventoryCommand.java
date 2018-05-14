@@ -12,6 +12,6 @@ public class InventoryCommand extends CommandHandler {
 	protected String processCommand(String[] tokens, Player player, Room room) {
 		String Yellow = "\033[33m";
 		String White = "\033[0m";
-		return (Yellow + player.listItems("You currently have a ") + White);
+		return ("\r\n" + Yellow + player.listItems("You currently have a ") + White);
 	}
 }

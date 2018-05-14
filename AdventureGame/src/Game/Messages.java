@@ -10,7 +10,7 @@ public class Messages {
 		temp[0] = "I don't know what you mean";
 		temp[1] = "You can't do that";
 		temp[2] = "I suppose one could, but I'd rather not";
-		temp[3] = "Has your mother heard that mouth?";
+		temp[3] = "Hey, watch your mouth!";
 		this.message = temp;
 		this.next = temp.length;
 	}

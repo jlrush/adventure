@@ -28,6 +28,6 @@ public class ExamineCommand extends CommandHandler {
 				} 
 			}
 		}
-		return Yellow + temp + White;
+		return "\r\n" + Yellow + temp + White;
 	}
 }

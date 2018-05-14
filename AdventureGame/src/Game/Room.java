@@ -36,6 +36,10 @@ public class Room extends ItemHolder {
 		this.beenHere = true;
 	}
 
+	public void setNotBeenHere() {
+		this.beenHere = false;
+	}
+
 	public void addLink(Link name) {
 		this.links.add(name);
 	}
@@ -43,15 +47,15 @@ public class Room extends ItemHolder {
 	public String preamble() {
 		String temp = "";
 		String temp2 = "";
-		temp = ("Location: " + this.name + "\r\n");
 		if (!this.getBeenHere()) {
-			temp += ("\r\n" + this.description + "\r\n");
+			temp += ("\r\n\033[33m" + this.description + "\r\n\033[0m");
 			setBeenHere();
 		}
+		temp += ("\r\nLocation: " + this.name + "\r\n");
 		temp += listExits();
 		temp2 = listItems("Room contains: ");
 		if (temp2.substring(0, 4).equals("Room"))
-			temp += ("\r\n" + listItems("Room contains: "));
+			temp += ("\r\n" + temp2);
 		return temp;
 	}
 

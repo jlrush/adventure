@@ -128,6 +128,6 @@ public class Adventure1 {
 		if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit")) {
 			this.gameIsOver = true;
 		} else
-			output.println(Yellow + player1.getInvalidMessage() + White);
+			output.println(CRLF + Yellow + player1.getInvalidMessage() + White);
 	}
 }
