@@ -27,7 +27,10 @@ public class ItemHolder {
 			}
 			return output.substring(0, (output.length() - 2));
 		} else {
-			return "You don't have anything";
+			if (prefix == "")
+				return "";
+			else
+				return "You don't have anything";
 		}
 	}
 

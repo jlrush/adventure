@@ -2,7 +2,6 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import Commands.CommandHandler;
 import Commands.CommandResult;
@@ -25,6 +24,8 @@ public class Adventure1 {
 		commands.add(new Commands.ExamineCommand());
 		commands.add(new Commands.InventoryCommand());
 		commands.add(new Commands.LookCommand());
+		commands.add(new Commands.GetCommand());
+		commands.add(new Commands.DropCommand());
 
 		output.println(current.preamble());
 	}
@@ -42,7 +43,6 @@ public class Adventure1 {
 		Room newRoom;
 
 		// Then everything else
-		boolean done = false;
 		String command = "";
 		String object = "";
 		String Yellow = "\033[33m";
@@ -84,44 +84,6 @@ public class Adventure1 {
 
 		if (result != null && result.processed) {
 			return;
-		}
-
-		// Get an object in a room
-		if (command.equals("get") && object != "") {
-			if (!current.findItem(object)) {
-				output.println(CRLF + Yellow + "There is no " + object + " in this room" + White);
-				return;
-			} else {
-				player1.addItem(current.getItem(object));
-				output.println(CRLF + Yellow + "You now have the " + object + White);
-				return;
-			}
-		}
-
-		// Get all objects in a room
-		if (command.equals("get") && object == "") {
-			String[] itemlist = current.listItems("").split(", ");
-			//
-			if (!current.findItem(object)) {
-				output.println(CRLF + Yellow + "There is no " + object + " in this room" + White);
-				return;
-			} else {
-				player1.addItem(current.getItem(object));
-				output.println(CRLF + Yellow + "You now have the " + object + White);
-				return;
-			}
-		}
-		
-		// Drop an object in a room
-		if (command.equals("drop") && object != "") {
-			if (!player1.findItem(object)) {
-				output.println(CRLF + Yellow + "You don't have any " + object + " to drop" + White);
-				return;
-			} else {
-				current.addItem(player1.getItem(object));
-				output.println(CRLF+ Yellow + "You no longer have the " + object + White);
-				return;
-			}
 		}
 
 		// Last command to check
