@@ -7,8 +7,8 @@ public class ItemHolder {
 	protected ArrayList<Item> item;
 
 	public ItemHolder() {
-		ArrayList<Item> item = new ArrayList<Item>();
-		this.item = item;
+		ArrayList<Item> temp = new ArrayList<Item>();
+		this.item = temp;
 	}
 
 	public void addItem(Item name) {
@@ -20,7 +20,7 @@ public class ItemHolder {
 	}
 
 	public String listItems(String prefix) {
-		if (item.size() != 0) {
+		if (item.size() > 0) {
 			String output = prefix;
 			for (Item item : this.item) {
 				output += (item.name + ", ");
@@ -36,10 +36,12 @@ public class ItemHolder {
 
 	public boolean findItem(String name) {
 		boolean found = false;
-		for (Item item : this.item) {
-			if (name.equalsIgnoreCase(item.name)) {
-				found = true;
-				break;
+		if (item.size() > 0) {
+			for (Item item : this.item) {
+				if (name.equalsIgnoreCase(item.name)) {
+					found = true;
+					break;
+				}
 			}
 		}
 		return found;

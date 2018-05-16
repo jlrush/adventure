@@ -26,6 +26,7 @@ public class Adventure1 {
 		commands.add(new Commands.LookCommand());
 		commands.add(new Commands.GetCommand());
 		commands.add(new Commands.DropCommand());
+		commands.add(new Commands.HelpCommand());
 
 		output.println(current.preamble());
 	}

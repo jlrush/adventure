@@ -45,7 +45,8 @@ public class ServerConnection extends Thread {
 			output.println("Welcome, Player One! What shall I call you?\r\n");
 			String playerName = filter(reader.readLine());
 			
-			output.println("\r\nOkay, " + playerName + ", here we go!\r\n\r\n\r\n");
+			output.println("\r\nOkay, " + playerName + ", type \033[32mhelp\033[0m see a list of commands");
+			output.println("...and here we go!\r\n\r\n\r\n");
 			System.out.println(playerName + ", has bravely entered the dungeon.");
 			game = new Adventure1(output, playerName);
 			//this.notice.run();

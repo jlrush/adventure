@@ -14,7 +14,7 @@ public class ExamineCommand extends CommandHandler {
 		String White = "\033[0m";
 		String temp = "";
 		if (tokens.length < 2) {
-			temp = "What do you want to examine?";
+			temp = "What do you want to examine, " + player.getName() + "?";
 			return Yellow + temp + White;
 		}
 		

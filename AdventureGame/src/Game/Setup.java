@@ -24,8 +24,12 @@ public class Setup {
 		Room Bedroom3 = new Room("Bedroom 3","This is a teenage boy's bedroom\r\nThere is a twin-size water bed against one wall");
 		Bedroom3.addLink(new Link(Bedroom3,HallEnd,"east"));
 		HallEnd.addLink(new Link(HallEnd,Bedroom3,"west"));
-		
-		
+		Room Living = new Room("Living Room","There's such a lot of livin' to do!");
+		HallEnd.addLink(new Link(HallEnd,Living,"east"));
+		Living.addLink(new Link(Living,HallEnd,"west"));
+		Room Porch = new Room("Front Porch","You're standing outside the house.\r\nThere's not much to see here.\r\nYou should probably just go inside.");
+		Living.addLink(new Link(Living,Porch,"north"));
+		Porch.addLink(new Link(Porch,Living,"south"));
 		
 		return(Master);
 	}

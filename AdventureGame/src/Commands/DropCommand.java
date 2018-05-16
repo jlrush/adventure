@@ -17,12 +17,12 @@ public class DropCommand extends CommandHandler {
 		String object;
 
 		if (tokens.length >= 2) {
-			object = tokens[1];
-			if (!player.findItem(object)) {
-				output = CRLF + Yellow + "You don't have any " + object + " to drop" + White;
-			} else {
-				room.addItem(player.getItem(object));
-				output = CRLF + Yellow + "You no longer have the " + object + White;
+				object = tokens[1];
+				if (!player.findItem(object)) {
+					output = CRLF + Yellow + "You don't have any " + object + " to drop, " + player.getName() + White;
+				} else {
+					room.addItem(player.getItem(object));
+					output = CRLF + Yellow + "You no longer have the " + object + White;
 			}
 			return output;
 		}
@@ -30,7 +30,7 @@ public class DropCommand extends CommandHandler {
 		// Get all objects in a room
 		String list = player.listItems("");
 		if (list == "")
-			output = CRLF + Yellow + "You don't anything to drop" + White;
+			output = CRLF + Yellow + "You don't have anything to drop, " + player.getName() + White;
 		else {
 			String itemlist[] = list.split(", ");
 			for (String temp : itemlist) {
