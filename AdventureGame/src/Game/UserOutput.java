@@ -22,4 +22,11 @@ public abstract class UserOutput {
 	public void warning(String message) { 
 		this.println(message);
 	}
+
+	public void clearscreen() {
+	}
+
+	public void prompt(String prompt) {
+		this.print(prompt);
+	}
 }
