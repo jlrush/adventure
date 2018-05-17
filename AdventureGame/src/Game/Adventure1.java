@@ -46,9 +46,6 @@ public class Adventure1 {
 		// Then everything else
 		String command = "";
 		String object = "";
-		String Yellow = "\033[33m";
-		String White = "\033[0m";
-		String CRLF = "\r\n";
 
 		// Parse the commands
 		if (input.indexOf(" ") == -1) {
@@ -63,7 +60,7 @@ public class Adventure1 {
 		newRoom = current.takeExit(command);
 		if (newRoom != null) {
 			if (current.equals(newRoom))
-				output.println(CRLF + "\033[93m" + "There is no exit in that direction" + White);
+				output.activity("There is no exit in that direction");
 			else {
 				current = newRoom;
 			}
@@ -91,6 +88,6 @@ public class Adventure1 {
 		if (command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("quit")) {
 			this.gameIsOver = true;
 		} else
-			output.println(CRLF + Yellow + player1.getInvalidMessage() + White);
+			output.activity(player1.getInvalidMessage());
 	}
 }

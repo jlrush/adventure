@@ -6,4 +6,8 @@ public abstract class UserOutput {
 	public void println(String text) {
 		print(text + "\r\n");
 	}
+	
+	public void activity(String message) { 
+		this.println(message);
+	}
 }

@@ -10,6 +10,10 @@ import java.nio.charset.StandardCharsets;
 import Game.UserOutput;
 
 public class TelnetOutput extends UserOutput {
+	private static final String Yellow = "\033[33m";
+	private static final String White = "\033[0m";
+	private static final String CRLF = "\r\n";
+
 	//private OutputStream stream;
 	private PrintWriter writer;
 	
@@ -31,5 +35,11 @@ public class TelnetOutput extends UserOutput {
 		System.out.print(text);
 		writer.print(text);
 		writer.flush();
+	}
+	
+	@Override
+	public void activity(String message) {
+		System.out.print(message);
+		writer.print(CRLF + Yellow + message + White + CRLF);
 	}
 }
