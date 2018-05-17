@@ -2,6 +2,7 @@ package Commands;
 
 import Game.Player;
 import Game.Room;
+import Game.UserOutput;
 
 public class LookCommand extends CommandHandler {
 	public LookCommand() {
@@ -9,8 +10,7 @@ public class LookCommand extends CommandHandler {
 	}
 
 	@Override
-	protected String processCommand(String[] tokens, Player player, Room room) {
+	protected void processCommand(UserOutput output, String[] tokens, Player player, Room room) {
 		room.setNotBeenHere();
-		return "";
 	}
 }

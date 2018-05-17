@@ -2,6 +2,7 @@ package Commands;
 
 import Game.Player;
 import Game.Room;
+import Game.UserOutput;
 
 public class DropCommand extends CommandHandler {
 	public DropCommand() {
@@ -9,36 +10,35 @@ public class DropCommand extends CommandHandler {
 	}
 
 	@Override
-	protected String processCommand(String[] tokens, Player player, Room room) {
-		String Yellow = "\033[33m";
-		String White = "\033[0m";
-		String CRLF = "\r\n";
-		String output = "";
+	protected void processCommand(UserOutput output, String[] tokens, Player player, Room room) {
+		String message = "";
 		String object;
 
 		if (tokens.length >= 2) {
 				object = tokens[1];
 				if (!player.findItem(object)) {
-					output = CRLF + Yellow + "You don't have any " + object + " to drop, " + player.getName() + White;
+					message = "You don't have any " + object + " to drop, " + player.getName();
 				} else {
 					room.addItem(player.getItem(object));
-					output = CRLF + Yellow + "You no longer have the " + object + White;
+					message = "You no longer have the ";
 			}
-			return output;
+
+			output.activity(message);
 		}
 
 		// Get all objects in a room
 		String list = player.listItems("");
 		if (list == "")
-			output = CRLF + Yellow + "You don't have anything to drop, " + player.getName() + White;
+			message = "You don't have anything to drop, " + player.getName();
 		else {
 			String itemlist[] = list.split(", ");
 			for (String temp : itemlist) {
 				object = temp;
 				room.addItem(player.getItem(object));
-				output += CRLF + Yellow + "You no longer have the " + object + White;
+				message += "You no longer have the " + object;
 			}
 		}
-		return output;
+		
+		output.activity(message);
 	}
 }

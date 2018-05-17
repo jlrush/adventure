@@ -2,6 +2,7 @@ package Commands;
 
 import Game.Player;
 import Game.Room;
+import Game.UserOutput;
 
 public class InventoryCommand extends CommandHandler {
 	public InventoryCommand() {
@@ -9,13 +10,10 @@ public class InventoryCommand extends CommandHandler {
 	}
 
 	@Override
-	protected String processCommand(String[] tokens, Player player, Room room) {
-		String Yellow = "\033[33m";
-		String White = "\033[0m";
-		String result = player.listItems("You currently have a ");
-		if (result == "")
-			return "";
-		else
-			return ("\r\n" + Yellow + player.listItems("You currently have a ") + White);
+	protected void processCommand(UserOutput output, String[] tokens, Player player, Room room) {
+		String message = player.listItems("You currently have a ");
+		if (message.length() > 0) {
+			output.activity(message);
+		}
 	}
 }

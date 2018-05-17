@@ -28,7 +28,7 @@ public class Adventure1 {
 		commands.add(new Commands.DropCommand());
 		commands.add(new Commands.HelpCommand());
 
-		output.println(current.preamble());
+		current.preamble(output);
 	}
 
 	public boolean isGameOver() {
@@ -37,7 +37,7 @@ public class Adventure1 {
 
 	public void ProcessInput(String input) {
 		processInternal(input);
-		output.println(current.preamble());
+		current.preamble(output);
 	}
 
 	public void processInternal(String input) {
@@ -60,7 +60,7 @@ public class Adventure1 {
 		newRoom = current.takeExit(command);
 		if (newRoom != null) {
 			if (current.equals(newRoom))
-				output.activity("There is no exit in that direction");
+				output.warning("There is no exit in that direction");
 			else {
 				current = newRoom;
 			}
@@ -70,11 +70,7 @@ public class Adventure1 {
 		// Handle any registered command
 		CommandResult result = null;
 		for (CommandHandler handler : commands) {
-			result = handler.executeCommand(input, player1, current);
-			if (result.output != null && !result.output.isEmpty()) {
-				output.println(result.output);
-			}
-
+			result = handler.executeCommand(output, input, player1, current);
 			if (result.processed) {
 				break;
 			}

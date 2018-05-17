@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import Game.Player;
 import Game.Room;
+import Game.UserOutput;
 
 public abstract class CommandHandler {
 	ArrayList<String> commands = new ArrayList<String>();
@@ -12,7 +13,7 @@ public abstract class CommandHandler {
 		this.commands = new ArrayList<String>(Arrays.asList(commands));
 	}
 	
-	public CommandResult executeCommand(String command, Player player, Room room) {
+	public CommandResult executeCommand(UserOutput output, String command, Player player, Room room) {
 		// Get each word in the input and split it into an array
 		String[] tokens = command.split("\\s+");
 		boolean commandMatches = false;
@@ -29,11 +30,11 @@ public abstract class CommandHandler {
 		if (commandMatches) {
 			// We have a match, so go ahead and process the command
 			result.processed = true;
-			result.output = processCommand(tokens, player, room);
+			processCommand(output, tokens, player, room);
 		}
 		
 		return result;
 	}
 	
-	protected abstract String processCommand(String[] tokens, Player player, Room room);
+	protected abstract void processCommand(UserOutput output, String[] tokens, Player player, Room room);
 }

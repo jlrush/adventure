@@ -2,6 +2,7 @@ package Commands;
 
 import Game.Player;
 import Game.Room;
+import Game.UserOutput;
 
 public class ExamineCommand extends CommandHandler {
 	public ExamineCommand() {
@@ -9,25 +10,25 @@ public class ExamineCommand extends CommandHandler {
 	}
 	
 	@Override
-	protected String processCommand(String[] tokens, Player player, Room room) {
-		String Yellow = "\033[33m";
-		String White = "\033[0m";
-		String temp = "";
+	protected void processCommand(UserOutput output, String[] tokens, Player player, Room room) {
+		String message = "";
+
 		if (tokens.length < 2) {
-			temp = "What do you want to examine, " + player.getName() + "?";
-			return Yellow + temp + White;
-		}
-		
-		String target = tokens[1];
-		if (target != null && !target.isEmpty() ) {
-			temp = room.examItem(target);
-			if (temp == null) {
-				temp = player.examItem(target);
-				if (temp == null) {
-					temp = "I don't see that here";
-				} 
+			message = "What do you want to examine, " + player.getName() + "?";
+		} else {
+			String target = tokens[1];
+			if (target != null && !target.isEmpty() ) {
+				message = room.examItem(target);
+				if (message == null) {
+					message = player.examItem(target);
+					if (message == null) {
+						output.warning("I don't see that here");
+						return;
+					} 
+				}
 			}
 		}
-		return "\r\n" + Yellow + temp + White;
+		
+		output.activity(message);
 	}
 }
