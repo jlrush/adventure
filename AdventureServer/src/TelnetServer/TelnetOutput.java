@@ -35,7 +35,7 @@ public class TelnetOutput extends UserOutput {
 	
 	@Override
 	public void print(String text) {
-		System.out.print(text);
+		System.out.println(text);
 		writer.print(text);
 		writer.flush();
 	}
@@ -47,19 +47,19 @@ public class TelnetOutput extends UserOutput {
 	
 	@Override
 	public void roomName(String message) {
-		System.out.print(message);
+		System.out.println(message);
 		writer.print(CRLF + Cyan + message + White + CRLF);
 	}
 	
 	@Override
 	public void activity(String message) {
-		System.out.print(message);
+		System.out.println(message);
 		writer.print(CRLF + Yellow + message + White + CRLF);
 	}
 
 	@Override
 	public void warning(String message) {
-		System.out.print(message);
+		System.out.println(message);
 		writer.print(CRLF + BrightYellow + message + White + CRLF);
 	}
 }

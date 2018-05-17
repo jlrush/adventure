@@ -15,15 +15,16 @@ public class DropCommand extends CommandHandler {
 		String object;
 
 		if (tokens.length >= 2) {
-				object = tokens[1];
-				if (!player.findItem(object)) {
-					message = "You don't have any " + object + " to drop, " + player.getName();
-				} else {
-					room.addItem(player.getItem(object));
-					message = "You no longer have the ";
+			object = tokens[1];
+			if (!player.findItem(object)) {
+				message = "You don't have any " + object + " to drop, " + player.getName();
+			} else {
+				room.addItem(player.getItem(object));
+				message = "You no longer have the ";
 			}
 
 			output.activity(message);
+			return;
 		}
 
 		// Get all objects in a room

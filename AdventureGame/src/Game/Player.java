@@ -1,5 +1,4 @@
 package Game;
-import java.util.ArrayList;
 
 public class Player extends ItemHolder {
 	private String name;

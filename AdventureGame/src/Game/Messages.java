@@ -1,5 +1,4 @@
 package Game;
-import java.util.Arrays;
 
 public class Messages {
 	private int next;
